@@ -4,7 +4,7 @@ import * as types from './types';
 export const getDataAction = (context: any, {type = "", params = {}}) => {
   context.commit(types.CHECKOUT_REQUEST);
   const Server: any = Url;
-  Server[type](params)
+  return Server[type](params)
     .then((res: any) => {
       context.commit(types.CHECKOUT_SUCCESS, {data: res.data, type})
     })

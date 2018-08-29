@@ -7,7 +7,7 @@
     </div>
   </transition>
 </template>
-<script>
+<script lang="es6">
 export default {
   name: 'Loading',
   data() {

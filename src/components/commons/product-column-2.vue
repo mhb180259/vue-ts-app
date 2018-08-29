@@ -68,7 +68,7 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="js">
 export default {
   name: 'product-column-2',
   props: {
@@ -99,7 +99,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .product-column-2 {
   overflow: auto;
 }
@@ -156,10 +156,10 @@ export default {
   padding: 14px 8px;;
   line-height: 1;
   &.off {
-    background-image: url('../assets/label_red.png');
+    background-image: url('../../assets/label_red.png');
   }
   &.flash {
-    background-image: url('../assets/label_yellow.png');
+    background-image: url('../../assets/label_yellow.png');
   }
 }
 .product-item-img {

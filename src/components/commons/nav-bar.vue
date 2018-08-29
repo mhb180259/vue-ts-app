@@ -6,11 +6,12 @@
     <router-link class="nav-bar-item" to="category" replace>
       <div class="iconfont icon-fenlei"></div>
     </router-link>
-    <a class="nav-bar-item tel" :href="'tel:'+$state.mobile">
-    </a>
+    <!--<a class="nav-bar-item tel" :href="'tel:'+$state.mobile"></a>-->
+    <a class="nav-bar-item tel"></a>
     <router-link class="nav-bar-item" to="cart" replace>
       <div class="iconfont icon-gouwuche">
-        <span class="badge">{{cartCount}}</span>
+        <span class="badge">0</span>
+        <!--<span class="badge">{{cartCount}}</span>-->
       </div>
     </router-link>
     <router-link class="nav-bar-item last" to="about-me" replace>
@@ -18,7 +19,7 @@
     </router-link>
   </div>
 </template>
-<script>
+<script lang="es6">
 import { mapGetters } from 'vuex'
 export default {
   name: 'NavBar',
@@ -26,11 +27,11 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['cartCount'])
+    // ...mapGetters(['cartCount'])
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .nav-bar {
   background-color: #fff;
   width: 100%;
@@ -57,7 +58,7 @@ export default {
     font-size: 40px;
   }
   &.tel {
-    background-image: url('../assets/tel.png');
+    background-image: url('../../assets/tel.png');
     background-size: contain;
   }
 }

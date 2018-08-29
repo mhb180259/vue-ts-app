@@ -6,14 +6,14 @@ const resolve = dir => {
   return path.join(__dirname, dir);
 };
 const TRAGET_URL = "http://47.96.141.89:18085";
-/*eslint-disable*/
+
 module.exports = {
   devServer: {
     proxy: {
       "/gateway": {
         target: TRAGET_URL,
-      },
-    },
+      }
+    }
   },
   chainWebpack: config => {
     config.resolve.alias
@@ -27,7 +27,7 @@ module.exports = {
     loaderOptions: {
       less: {
         data: `@import "@/style/variables.less";`,
-      },
-    },
-  },
+      }
+    }
+  }
 };
