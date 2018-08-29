@@ -1,0 +1,43 @@
+{
+  "data": {
+    "bars": [
+      {
+        "type": "detail",
+        "key": "10189",
+        "url": "http://ltsres-us.oss-us-west-1.aliyuncs.com/misc/7464e81f75862237e16f01d13cedd9c2.png"
+      },
+      {
+        "name": "activity",
+        "key": 2,
+        "url": "http://ltsres-us.oss-us-west-1.aliyuncs.com/misc/c3aa32b76ede7fa945f09499708d4568.png",
+        "image": "http://ltsres-us.oss-us-west-1.aliyuncs.com/misc/cf08b056c6eb8043b60f56087a5cab03.png",
+        "tags": ["may01week"],
+        "sortid": "10810-10811-10120"
+      },
+      {
+        "name": "Jump Into Summer",
+        "key": "0427",
+        "url": "https://mall.ltsecurityinc.com/static/img/banner0503.aa50ad2.png",
+        "image": "http://ltsres-us.oss-us-west-1.aliyuncs.com/misc/cf08b056c6eb8043b60f56087a5cab03.png",
+        "tags": ["may01week"],
+        "sortid": "11691-11686-11687-11676-11677-11678-11685-11680-11681-11682-11683-11684-11688-11689-11690"
+      },
+
+      {
+        "key": "1",
+        "type": "search",
+        "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/4064cfadbd0155751b833bcf3e9d3a6d.png",
+        "image": "https://ltsres-us.oss-us-west-1.aliyuncs.com/misc/cf08b056c6eb8043b60f56087a5cab03.png",
+        "discountType": 0,
+        "desc":"搜索使用"
+      },
+      { "key": "2", "type": "search", "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/4df787dec2ac8e6a12263103d96ed41c.png", "tags": ["5月68折套装"] }
+    ]
+  },
+  "error_code": 999,
+  "error_message": "",
+  "error_name": "SERVICE_ERROR",
+  "fail": false,
+  "success": true,
+  "success_message": ""
+}

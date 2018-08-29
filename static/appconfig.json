@@ -1,0 +1,52 @@
+{
+  "data": {
+    "bars": [
+      {
+        "name": "activity",
+        "key": "august",
+        "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/0ef79904a009e86945de143fe26615c9.png",
+        "image": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/d468dbf9dea98182b96d173b19602d19.png",
+        "tags": [],
+        "sortid": "12617,12618,12619,12620,12621,12622,12629,12630,12631,12632,12633,12642,12643,12644,12645,12639,12647,12640,12641,12634,12635,12636,12637,12638,12623,12624,12625,12626,12627,12628,12649",
+        "activityType": "fixedGoods"
+      },
+      {
+        "name": "miaosha",
+        "type": "miaosha",
+        "key": "miaosha",
+        "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/d2b78471a5566f894c860ad78fb3aef7.png"
+      },
+      {
+        "name": "activity-6get2",
+        "type": "activity-6get2",
+        "key": "0625",
+        "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/3d5705c026984a76c6dca3c8a0e8416f.png"
+      },
+      {
+        "name": "activity",
+        "key": "haikang",
+        "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/ef52f22c34836835cee7bd113abf9c94.png",
+        "image": "http://ltsres-us.oss-us-west-1.aliyuncs.com/misc/c6ed910e2a74422ed4725a6109d80a65.png",
+        "tags": [],
+        "sortid": "12585,12586,12527,12528,12529,12530",
+        "activityType": "fixedGoods"
+      },
+      {
+        "name": "activity",
+        "key": "assa",
+        "url": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/cbac164807ead6d1ce9be56aa7063fc8.png",
+        "image": "https://ltsb2b.oss-us-west-1.aliyuncs.com/misc/cbac164807ead6d1ce9be56aa7063fc8.png",
+        "tags": [],
+        "sortid": "12590,12591,12592,12593,12594",
+        "activityType": "fixedGoods"
+      }
+    ]
+  },
+  "error_code": 999,
+  "error_message": "",
+  "error_name": "SERVICE_ERROR",
+  "fail": false,
+  "success": true,
+  "success_message": ""
+}
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta id="vp" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>lst-app2.0</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but lst-app2.0 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+    function setViewport() {
+      const scale = document.body.clientWidth / 750;
+      document.getElementById("vp").content = 'width=750, initial-scale=' + scale + ', minimum-scale=' + scale + ', maximum-scale=' + scale + '';
+    }
+
+    window.onload = function () {
+      setViewport();
+    };
+    var agent = {
+      rootUrl: '/',
+      rules: [],
+      checkMobile: function () {
+        var flag = false;
+        var agent = navigator.userAgent.toLowerCase();
+        var keywords = ["android", "iphone", "ipod", "ipad", "windows phone", "mqqbrowser"];
+        //排除 Windows 桌面系统
+        if (!(agent.indexOf("windows nt") > -1) || (agent.indexOf("windows nt") > -1 && agent.indexOf("compatible; msie 9.0;") > -1)) {
+          //排除苹果桌面系统
+          if (!(agent.indexOf("windows nt") > -1) && !agent.indexOf("macintosh") > -1) {
+            for (var k = 0;k< keywords.length;k++) {
+              var item =  keywords[k];
+              if (agent.indexOf(item) > -1) {
+                flag = true;
+                break;
+              }
+            }
+          }
+        }
+        return flag;
+      },
+      addRule: function (rule) {
+        this.rules.push(rule)
+      },
+      redirect: function (url) {
+        // 根据设备判断是否重定向
+        if (!this.checkMobile()) {
+          // 如果是移动端
+          var redirectUrl = this.rootUrl;
+          this.rules.forEach(function (rule) {
+            var result = rule(url);
+            if (result) {
+              redirectUrl += result
+            }
+          });
+          location.href = redirectUrl.replace(/\/\//g,'/')
+        }
+      }
+    };
+    agent.addRule(function (curUrl) {
+        if (/\/product-detail/.test(curUrl)) {
+          var execResult = /(id=\d+)/.exec(curUrl);
+          if (execResult) {
+            return 'detail/#/info?' + execResult[1]
+          }
+        }
+        return false
+      }
+    );
+    agent.addRule(function (curUrl) {
+      if (/\/activity/.test(curUrl)) {
+        var url = ''
+        var key = /key=([^&]+)/.exec(curUrl);
+        if (key) {
+          url += 'activity/#/activity' + key[1] + '?'
+        } else {
+          return false
+        }
+        var tags = curUrl.match(/(tags=[^&]+)/gi);
+        if (tags.length === 1) {
+          url += tags[0] + '&'
+        } else if (tags.length > 1) {
+          url += JSON.stringify(tags) + '&'
+        }
+        var sortid = /(sortid=[^&]+)/.exec(curUrl);
+        if (sortid) {
+          url += sortid[1]
+        }
+        return url
+      }
+      return false
+    });
+    agent.redirect(location.href)
+    </script>
+  </body>
+</html>

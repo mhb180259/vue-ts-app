@@ -1,0 +1,14 @@
+//button
+.mixin(@color, @height) {
+  color: #fff;
+  background-color: @color;
+  border: 1px solid @color;
+  border-radius: @height / 2;
+  line-height: @height;
+  &:enabled:active,
+  &.active:enabled {
+    color: #fff;
+    background-color: desaturate(@color, 20%);
+    border: 1px solid desaturate(@color, 20%);
+  }
+}
