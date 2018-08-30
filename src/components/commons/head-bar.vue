@@ -46,8 +46,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$header-height: 88px !default;
+<style lang="less" scoped>
+@header-height: 88px !important;
 // .header-bar.is-fixed {
 //   right: 0;
 //   top: 39px;
@@ -61,14 +61,14 @@ $header-height: 88px !default;
   z-index: 10;
 }
 .bottom-box {
-  height: $header-height;
+  height: @header-height;
 }
 .header-bar {
   display: flex;
   align-items: center;
   width: 100%;
-  height: $header-height;
-  min-height: $header-height;
+  height: @header-height;
+  min-height: @header-height;
   background-color: #fff;
   color: #000;
   box-sizing: border-box;

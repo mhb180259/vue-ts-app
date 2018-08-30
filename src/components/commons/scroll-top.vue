@@ -28,7 +28,6 @@ export default {
     if (window.getComputedStyle(parent, null).position !== 'absolute' && window.getComputedStyle(parent, null).position !== 'fixed') {
       parent.style.position = 'relative'
     }
-    console.log('parent', parent);
     parent.addEventListener('scroll', () => {
       if (parent.scrollTop === 0 && this.show) {
         this.show = false

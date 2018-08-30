@@ -1,13 +1,32 @@
-import {Url} from '@/config';
+import {dataUrl} from '@/config';
 
 const urlObj: any = {};
-Object.keys(Url).forEach((key) => {
+Object.keys(dataUrl).forEach((key) => {
   urlObj[key] = null
 });
+// 共同的state，判断loading状态
+const commonState = {
+  loading: false
+};
 
-const state = {
-  loading: false,
+
+// 存储商品列表等常用数据
+const dataState = {
+  ...commonState,
   ...urlObj
 };
 
-export default state
+// 存储关于用户信息
+const userState = {
+  ...commonState,
+  auth: true,
+  email: "",
+  account: "",
+  status: "",
+  couponNum: 0
+};
+
+export {
+  dataState,
+  userState
+};

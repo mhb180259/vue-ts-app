@@ -16,14 +16,20 @@ export default new Router({
         {
           path: 'home',
           name: 'home',
-          component: () => import('@/components/home/index.vue')
-        }
+          component: () => import(/* webpackChunkName: "home" */'@/components/home/index.vue')
+        },
+        // {
+        //   path: 'about-me',
+        //   name: 'about-me',
+        //   component: () => import('@/components/my/about-me.vue'),
+        //   meta: { auth: true }
+        // }
       ]
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ '@/components/About.vue'),
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login/Login.vue')
     },
   ],
 });

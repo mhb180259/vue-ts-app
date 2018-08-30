@@ -11,6 +11,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.10",
+    "md5": "^2.2.1",
+    "store2": "^2.7.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-lazyload": "^1.2.6",

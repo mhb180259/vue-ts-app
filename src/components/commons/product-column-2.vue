@@ -1,6 +1,6 @@
 <template>
   <div class="product-column-2">
-    <div class="product-header" v-if="title!==''">
+    <div class="product-header" v-if="title!==''&&products.length > 0">
       <span>—</span> {{title}}
       <span>—</span>
       <slot class="pull-right"></slot>

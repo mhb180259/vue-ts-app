@@ -1,28 +1,37 @@
 <template>
   <div class="input-group">
-    <div class="input-label"><span class="required" v-if="required">*</span><slot></slot></div>
+    <div class="input-label"><span class="required" v-if="required">*</span>
+      <slot></slot>
+    </div>
     <div class="input-field" :class="{'errorInfo': error}">
-      <textarea v-if="type === 'textarea'" cols="3" rows="10" :placeholder="placeholder" :value="value" @input="handleInput($event.target.value)" @focus="onFocus" @blur="onBlur" :class="{'error': error}"></textarea>
+      <textarea v-if="type === 'textarea'" cols="3" rows="10" :placeholder="placeholder" :value="value"
+                @input="handleInput($event.target.value)" @focus="onFocus" @blur="onBlur"
+                :class="{'error': error}"></textarea>
       <template v-if="type === 'select'">
-        <input readonly :type="type" :placeholder="placeholder" :value="value" @input="handleInput($event.target.value)" @click="showPicker" :class="{'error': error}">
+        <input readonly :type="type" :placeholder="placeholder" :value="value" @input="handleInput($event.target.value)"
+               @click="showPicker" :class="{'error': error}">
         <span class="select-icon iconfont icon-paixujiantouxia"></span>
       </template>
       <template v-if="type === 'date'">
-        <input readonly type="text"  :placeholder="placeholder" :value="value" @input="onBlur($event);handleInput($event.target.value)" @click="showDate" :class="{'error': error}">
+        <input readonly type="text" :placeholder="placeholder" :value="value"
+               @input="onBlur($event);handleInput($event.target.value)" @click="showDate" :class="{'error': error}">
         <span class="select-icon iconfont icon-paixujiantouxia"></span>
       </template>
       <div class="picture" v-if="type === 'picture'" @click="addImage">
         <img v-if="value !== ''" :src="value" alt="">
         <span v-else class="iconfont icon-xiangji"></span>
       </div>
-      <input v-if="type === 'text' || type === 'password' || type === 'number'" :type="type" :placeholder="placeholder" :value="value" @input="handleInput($event.target.value)" @focus="onFocus" @blur="onBlur" :class="{'error': error}">
+      <input v-if="type === 'text' || type === 'password' || type === 'number'" :type="type" :placeholder="placeholder"
+             :value="value" @input="handleInput($event.target.value)" @focus="onFocus" @blur="onBlur"
+             :class="{'error': error}">
     </div>
   </div>
 </template>
-<script>
-import uploadPic from '@/plugs/uploadPic'
+<script lang="es6">
+// import uploadPic from "@/plugs/uploadPic";
+
 export default {
-  name: 'input-group',
+  name: "input-group",
   props: {
     pickData: Object,
     required: { type: Boolean, default: false },
@@ -30,7 +39,7 @@ export default {
     placeholder: String,
     type: {
       type: String,
-      default: 'text'
+      default: "text"
     },
     rule: String,
     value: String
@@ -39,43 +48,43 @@ export default {
     return {
       error: false,
       isFixNeedFocus: 0
-    }
+    };
   },
   methods: {
     check(value) {
-      value = value || this.value
-      if (!this.required && (value === null || value === '')) return true
-      let flag = true
-      if (this.required && (value === null || value === '')) flag = false
+      value = value || this.value;
+      if (!this.required && (value === null || value === "")) return true;
+      let flag = true;
+      if (this.required && (value === null || value === "")) flag = false;
       if (flag) {
-        flag = this.rule ? this.$checkType.check(this.rule, value) : true
+        flag = this.rule ? this.$checkType.check(this.rule, value) : true;
       }
       if (!flag) {
-        this.error = true
+        this.error = true;
       } else {
-        this.error = false
+        this.error = false;
       }
-      return flag
+      return flag;
     },
     onBlur(event) {
       if (!this.check(event.target.value)) {
         // this.error = true
       } else {
-        this.$emit('onBlur', event.target.value)
+        this.$emit("onBlur", event.target.value);
       }
     },
     onFocus(event) {
-      let target = event.target
-      if (!target) return
-      this.error = false
+      let target = event.target;
+      if (!target) return;
+      this.error = false;
       setTimeout(() => {
         if (target.scrollIntoViewIfNeeded) {
-          target.scrollIntoViewIfNeeded(false)
+          target.scrollIntoViewIfNeeded(false);
         } else {
-          target.scrollIntoView(false)
+          target.scrollIntoView(false);
         }
-        target.value = target.value
-      }, 250)
+        target.value = target.value;
+      }, 250);
     },
     // onBlur() {
     //   this.isFixNeedFocus = 0
@@ -131,45 +140,47 @@ export default {
     //   this.isFixNeedFocus = this.isFixNeedFocus + 1
     // },
     addImage() {
-      uploadPic(url => {
-        this.$emit('input', url)
-      })
+      // uploadPic(url => {
+      //   this.$emit("input", url);
+      // });
     },
     handleInput(val) {
-      this.$emit('input', val)
+      this.$emit("input", val);
     },
     showPicker() {
-      const self = this
+      const self = this;
       this.$picker.show({
         selectData: this.pickData,
         callback: function(data) {
-          this.show = false
+          this.show = false;
           if (data.select1) {
-            self.$emit('input', data.select1.value)
-            self.$emit('change', data.select1)
+            self.$emit("input", data.select1.value);
+            self.$emit("change", data.select1);
           }
         }
-      })
+      });
     },
     showDate() {
-      const self = this
+      const self = this;
       this.$date.show({
         callback: function(data) {
-          this.show = false
-          self.check(data)
-          self.$emit('input', data)
+          this.show = false;
+          self.check(data);
+          self.$emit("input", data);
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/scss/variables.scss';
+<style lang="less" scoped>
+@import '../../style/variables.less';
+
 .required {
-  color: $primary-color;
+  color: @primary-color;
 }
+
 .input-group {
   padding: 0 20px;
   .input-label {
@@ -209,7 +220,7 @@ export default {
     }
     input.error,
     textarea.error {
-      border: 1px solid $primary-color;
+      border: 1px solid @primary-color;
     }
     .select-icon {
       position: absolute;

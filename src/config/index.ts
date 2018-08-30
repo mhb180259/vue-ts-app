@@ -1,6 +1,8 @@
-import Url from "./url"
+import dataUrl from "./dataUrl"
+import getUrl from "./getUrl"
 
 
 export {
-  Url
+  dataUrl,
+  getUrl
 }

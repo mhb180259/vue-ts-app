@@ -9,6 +9,10 @@ import '~com';
 import '@/style/index.less'
 import '@/assets/font/iconfont.css'
 
+// 装载vue全局插件
+import plugin from './plugins';
+Vue.use(plugin, {store});
+
 Vue.use(VueLazyload, {
   preload: 1.3,
   error: require('@/assets/default.png'),

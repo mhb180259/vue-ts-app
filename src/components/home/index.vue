@@ -12,6 +12,7 @@
             <img :src="item.x_url" alt="">
           </div>
         </div>
+        <load-box :loading="!getHomeProducts"></load-box>
         <product-column-2 title="Best Sellers" :products="hotList"></product-column-2>
         <div v-for="item in floorList" :key="item.id">
           <product-column-2 :title="item.name" :products="item.items"></product-column-2>
@@ -24,7 +25,8 @@
 </template>
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import {State, Action} from 'vuex-class';
+import {namespace} from 'vuex-class';
+const Module = namespace("data");
 
 @Component({
   components: {
@@ -32,17 +34,14 @@ import {State, Action} from 'vuex-class';
     ScrollTop: () => import("~com/scroll-top.vue")
   }
 })
-export default class HomeView extends Vue {
-  @State loading: any;
+export default class Home extends Vue {
+  @Module.State loading: any;
 
-  @Action getDataAction: any;
-  @State getHomeBars: any;
-  @State getHomeProducts: any;
+  @Module.Action getData: any;
+  @Module.State getHomeBars: any;
+  @Module.State getHomeProducts: any;
 
-  data() {
-    return {}
-  }
-
+  private productLoading: boolean = false;
   get barsList() {
     if (!this.getHomeBars) return [];
     this.getHomeBars.data.bars.forEach((item: any) => {
@@ -78,8 +77,8 @@ export default class HomeView extends Vue {
   }
 
   private async mounted() {
-    this.getDataAction({type: "getHomeBars", params: {}});
-    this.getDataAction({type: "getHomeProducts", params: {}});
+    this.getData({type: "getHomeBars", params: {}});
+    this.getData({type: "getHomeProducts", params: {}});
   }
 }
 </script>

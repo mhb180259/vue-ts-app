@@ -24,3 +24,9 @@ yarn run lint
 ```
 yarn run test:unit
 ```
+npm install -D @types/module-name
+// import * as yourModuleName from 'module-name';
+const yourModuleName = require('module-name');
+
+参考：
+https://www.jianshu.com/p/286ceb8e866b
