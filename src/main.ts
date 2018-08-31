@@ -1,18 +1,18 @@
 import Vue from 'vue';
-import VueLazyload from 'vue-lazyload'
+import VueLazyload from 'vue-lazyload';
 
 import App from './App.vue';
 import router from './router/router';
 import store from './store';
-import '~com';
+import plugin from './plugins';
 
+import '~com';
 import '@/style/index.less'
 import '@/assets/font/iconfont.css'
 
-// 装载vue全局插件
-import plugin from './plugins';
-Vue.use(plugin, {store});
 
+// 装载vue全局插件
+Vue.use(plugin, {store});
 Vue.use(VueLazyload, {
   preload: 1.3,
   error: require('@/assets/default.png'),

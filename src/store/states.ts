@@ -26,7 +26,16 @@ const userState = {
   couponNum: 0
 };
 
+const cacheState = {
+  ...commonState,
+  categoryList: [],
+  cartCount: 0,
+  searchCateId: -1,
+  itemProduct: []
+};
+
 export {
   dataState,
-  userState
+  userState,
+  cacheState
 };

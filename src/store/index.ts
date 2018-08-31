@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {dataState, userState} from './states';
-import {dataMutations, userMutations} from './mutations';
-import {getDataAction, getUserActions} from './actions';
+import {dataState, userState, cacheState} from './states';
+import {dataMutations, userMutations, cacheMutations} from './mutations';
+import {getDataAction, getUserActions, getCacheActions} from './actions';
 import {dataGetters, userGetters} from './getters';
 
 Vue.use(Vuex);
@@ -23,10 +23,18 @@ const moduleUser = {
   getters: userGetters
 };
 
+const moduleCache = {
+  namespaced: true,
+  state: cacheState,
+  mutations: cacheMutations,
+  actions: getCacheActions
+};
+
 
 export default new Vuex.Store({
   modules: {
     data: moduleData,
-    user: moduleUser
+    user: moduleUser,
+    cache: moduleCache
   }
 })

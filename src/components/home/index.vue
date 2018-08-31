@@ -12,7 +12,7 @@
             <img :src="item.x_url" alt="">
           </div>
         </div>
-        <load-box :loading="!getHomeProducts"></load-box>
+        <load-box :load="!getHomeProducts"></load-box>
         <product-column-2 title="Best Sellers" :products="hotList"></product-column-2>
         <div v-for="item in floorList" :key="item.id">
           <product-column-2 :title="item.name" :products="item.items"></product-column-2>
@@ -30,8 +30,7 @@ const Module = namespace("data");
 
 @Component({
   components: {
-    HeaderNav: () => import("./Header.vue"),
-    ScrollTop: () => import("~com/scroll-top.vue")
+    HeaderNav: () => import("./Header.vue")
   }
 })
 export default class Home extends Vue {

@@ -4,3 +4,17 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import {namespace} from 'vuex-class';
+const Module = namespace("cache");
+
+@Component
+export default class App extends Vue {
+  @Module.Action categoryList: any;
+  private async created() {
+    this.categoryList({});
+  }
+}
+</script>
+

@@ -18,6 +18,11 @@ export default new Router({
           name: 'home',
           component: () => import(/* webpackChunkName: "home" */'@/components/home/index.vue')
         },
+        {
+          path: 'category',
+          name: 'category',
+          component: () => import('@/components/product/category.vue')
+        },
         // {
         //   path: 'about-me',
         //   name: 'about-me',

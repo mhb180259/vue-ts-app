@@ -43,7 +43,7 @@ export default {
   }
 }
 </script>
-<style lang="sss" scoped>
+<style lang="less" scoped>
 .header-search {
   display: flex;
   height: 88px;

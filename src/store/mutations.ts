@@ -36,7 +36,28 @@ const userMutations = {
   },
 };
 
+const cacheMutations = {
+  ...commonMutations,
+  [types.SEARCH_ITEM_PRODUCT](state: any, {data = {}, type = ""}) {
+    if (type === "initItem") {
+      state.itemProduct = (<any>data).data.item_d_o_list;
+    } else {
+      state.itemProduct = state.itemProduct.concat((<any>data).data.item_d_o_list);
+    }
+  },
+  [types.CATEGORY_ID](state: any, {data = {}, type = ""}) {
+    state.searchCateId = (<any>data).id;
+  },
+  [types.GET_CATEGORY_LIST](state: any, {data = {}, type = ""}) {
+    state.categoryList = (<any>data).datalist;
+  },
+  [types.CLEAR_ALL_ITEM](state: any, {data = {}, type = ""}) {
+    state.itemProduct = [];
+  },
+};
+
 export {
   dataMutations,
-  userMutations
+  userMutations,
+  cacheMutations
 }

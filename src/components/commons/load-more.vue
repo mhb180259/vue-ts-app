@@ -1,5 +1,5 @@
 <template>
-  <div class="load-more">
+  <div class="load-more" ref="loadmore">
     <img v-if="load" src="./loading/assets/loading-spin.svg" width="512" height="64" />
     <div class="no-more" v-if="!load">
       <div class="line"></div>
@@ -12,7 +12,14 @@
 export default {
   name: 'load-more',
   props: {
-    load: Boolean
+    load: {
+      type: Boolean,
+      default: false
+    },
+    isloading: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     text() {
@@ -23,15 +30,31 @@ export default {
     loadMore() {
       this.$emit('loadMore')
     }
+  },
+  mounted() {
+    let parent = (this.parent = this.$el.parentNode);
+    if (window.getComputedStyle(parent, null).position !== 'absolute' && window.getComputedStyle(parent, null).position !== 'fixed') {
+      parent.style.position = 'relative'
+    }
+    const winTop = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    let loadDom = this.$refs.loadmore;
+    parent.addEventListener('scroll', () => {
+      if (winTop * 2 - loadDom.getBoundingClientRect().top > 210 && !this.isloading) {
+        this.loadMore()
+      }
+    })
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .load-more {
   line-height: 64px;
   font-size: 22px;
   text-align: center;
-  padding: 20px;
+  overflow: hidden;
+  img {
+    margin-top: 30px;
+  }
   .load {
     border: 1px solid rgba(255, 59, 65, 0.9);
     border-radius: 25px;

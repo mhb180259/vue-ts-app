@@ -10,8 +10,9 @@ export default {
     //   store.dispatch(action, data)
     // }
     // window.mnRoute = () => {}
-    // Vue.prototype.$state = store.getters
-    // Vue.prototype.$dispatch = store.dispatch
+    Vue.prototype.$state = (<any>store).state;
+    Vue.prototype.$getters = (<any>store).getters;
+    Vue.prototype.$dispatch = (<any>store).dispatch;
     // Vue.prototype.$Promise = Promise
     // Vue.prototype.$prettys = prettys
     // Vue.prototype.$checkType = checkType
