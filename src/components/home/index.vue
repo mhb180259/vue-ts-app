@@ -35,12 +35,10 @@ const Module = namespace("data");
 })
 export default class Home extends Vue {
   @Module.State loading: any;
-
   @Module.Action getData: any;
   @Module.State getHomeBars: any;
   @Module.State getHomeProducts: any;
 
-  private productLoading: boolean = false;
   get barsList() {
     if (!this.getHomeBars) return [];
     this.getHomeBars.data.bars.forEach((item: any) => {

@@ -6,7 +6,7 @@ const commonMutations = {
   [types.CHECKOUT_REQUEST](state: any) {
     state.loading = true;
   },
-  [types.CHECKOUT_FAILURE](state: any) {
+  [types.HIDE_LOADING](state: any) {
     state.loading = false;
   },
 };
@@ -15,7 +15,6 @@ const dataMutations = {
   ...commonMutations,
   [types.CHECKOUT_SUCCESS](state: any, {data = {}, type = ""}) {
     state[type] = data;
-    state.loading = false;
   },
 };
 
@@ -23,7 +22,6 @@ const dataMutations = {
 const userMutations = {
   ...commonMutations,
   [types.SET_USER_INFO](state: any, {data = {}, type = ""}) {
-    state.loading = false;
     if ((<any>data).success) {
       cache("user", (<any>data).data);
     } else {

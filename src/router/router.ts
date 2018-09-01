@@ -23,12 +23,12 @@ export default new Router({
           name: 'category',
           component: () => import('@/components/product/category.vue')
         },
-        // {
-        //   path: 'about-me',
-        //   name: 'about-me',
-        //   component: () => import('@/components/my/about-me.vue'),
-        //   meta: { auth: true }
-        // }
+        {
+          path: 'about-me',
+          name: 'about-me',
+          component: () => import('@/components/my/about-me.vue'),
+          meta: { auth: true }
+        }
       ]
     },
     {

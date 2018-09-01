@@ -8,5 +8,11 @@ export default {
   },
   getHomeProducts(params: object): any {
     return axios.get("indexarea/get_index");
+  },
+  getUserDetails(params: object): any {
+    return axios.get("installer/installer_acct/query_shop_acct");
+  },
+  getUserHistory(params: object): any {
+    return axios.get("/installer/item/user_order_history", {params});
   }
 }

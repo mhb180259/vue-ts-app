@@ -31,7 +31,9 @@ axios.interceptors.response.use(
     //
     // }
   },
-  err => {}
+  err => {
+    // 接口报错，404
+  }
 );
 
 export default axios;

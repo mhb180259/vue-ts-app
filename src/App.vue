@@ -11,9 +11,9 @@ const Module = namespace("cache");
 
 @Component
 export default class App extends Vue {
-  @Module.Action categoryList: any;
+  @Module.Action getCategoryList: any;
   private async created() {
-    this.categoryList({});
+    this.getCategoryList({});
   }
 }
 </script>

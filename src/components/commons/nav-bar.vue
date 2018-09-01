@@ -38,10 +38,9 @@ export default {
   height: 98px;
   line-height: 98px;
   padding: 8px 20px;
-  // position: fixed;
-  // left: 0;
-  // right: 0;
-  // bottom: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
   font-size: 0;
 }
 .nav-bar-item {

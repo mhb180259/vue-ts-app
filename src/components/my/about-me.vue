@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content" @scroll="scroll">
+  <div class="main-content">
     <router-link class="about-me-header" to="account-detail">
       <div class="about-me-avatar">
         <div class="img" :style="{backgroundImage: 'url(' + avatarImg + ')'}"></div>
@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="main" v-infinite-scroll="loadNext" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+    <div class="main">
       <div class="product-column-2">
         <div class="product-header">
           — Order History —
@@ -152,91 +152,82 @@
     </div>
   </div>
 </template>
-<script lang="es6">
-// import checkService from '@/services/CheckService'
-// import scroll from '@/mixins/mixin-scroll'
-export default {
-  name: "about-me",
-  mixins: [scroll],
-  data() {
-    return {
-      historyData: [],
-      pagination: {
-        page: 0,
-        pageSize: 20,
-        total: 0
-      },
-      use_balance: 0,
-      bonusCount: 0,
-      vip: 0,
-      canLoad: true,
-      loading: true
-    };
-  },
-  computed: {
-    avatarImg() {
-      return this.me.avatar === "" ? require("../../assets/avatar-default.png") : this.me.avatar;
-    }
-  },
-  methods: {
-    loadNext() {
-      if (this.canLoad) {
-        this.queryHistory();
-      }
-    },
-    initialize() {
+<script lang="ts">
+import {Component, Vue} from 'vue-property-decorator';
+import {namespace} from 'vuex-class';
+const Module = namespace("data");
+
+@Component
+export default class About extends Vue {
+  @Module.State loading: any;
+  @Module.Action getData: any;
+  @Module.State getUserDetails: any;
+  @Module.State getUserHistory: any;
+
+  private historyData = [];
+  private pagination = {
+    page: 0,
+    pageSize: 20,
+    total: 0
+  };
+  private use_balance = 0;
+  private bonusCount = 0;
+  private vip = 0;
+  private canLoad = true;
+
+  get avatarImg() {
+    const avatar = (<any>this).me.avatar;
+    return avatar === "" ? require("../../assets/avatar-default.png") : avatar;
+  }
+
+  private loadNext() {
+    if (this.canLoad) {
       this.queryHistory();
-      checkService.checkInfo().then(
-        info => {
-          info = info.data;
-          if (!info || !info.acc_books) return;
-          let subjects = info.acc_books._object("subject");
-          this.use_balance = subjects["2010101"].use_balance;
-          let sub0201102 = subjects["2010102"];
-          this.bonusCount = sub0201102 && sub0201102.bonus ? sub0201102.bonus.length : 0;
-          this.vip = info.vip;
-          this.$store.commit("resetVip", { vip: info.vip });
-        },
-        function(msg) {
-          this.$toast.show({ type: "error", message: msg.error_message });
-        }
-      );
-    },
-    queryHistory() {
-      if (this.historyData.length >= this.pagination.total && this.pagination.page > 0) return;
-      this.loading = true;
-      this.pagination.page++;
-      let params = {
-        page: this.pagination.page,
-        page_size: this.pagination.pageSize
-      };
-      checkService.history(params).then(
-        orderInfo => {
-          this.loading = false;
-          let datalist = orderInfo.datalist;
-          this.pagination.total = orderInfo.total;
-          this.historyData._push(datalist, { x_group: 2 });
-          if (this.historyData.length === this.pagination.total || datalist.length < this.pagination.pageSize) {
-            this.canLoad = false;
-          }
-        },
-        msg => {
-          this.loading = false;
-          // this.$toast.show({ type: 'error', message: msg.error_message })
-        }
-      );
-    },
-    goOrder(status) {
-      this.$router.push({ name: "order-list", query: { status: status } });
-    },
-    viewDetail(item) {
-      this.$router.push({ path: "/product-detail", query: { id: item.id } });
     }
-  },
-  mounted: function() {
+  }
+
+  private async initialize() {
+    this.queryHistory();
+    let info = await this.getData({type: "getUserDetails"});
+    info = info.data;
+    if (!info || !info.acc_books) return;
+    let subjects = info.acc_books._object("subject");
+    this.use_balance = subjects["2010101"].use_balance;
+    let sub0201102 = subjects["2010102"];
+    this.bonusCount = sub0201102 && sub0201102.bonus ? sub0201102.bonus.length : 0;
+    this.vip = info.vip;
+    // this.$store.commit("resetVip", { vip: info.vip });
+  }
+
+
+  private async queryHistory() {
+    if (this.historyData.length >= this.pagination.total && this.pagination.page > 0) return;
+    this.pagination.page++;
+    let params = {
+      page: this.pagination.page,
+      page_size: this.pagination.pageSize
+    };
+    let orderInfo = await this.getData({type: "getUserHistory", params});
+    let datalist = orderInfo.datalist;
+    this.pagination.total = orderInfo.total;
+    console.log("historyData", orderInfo);
+    (<any>this.historyData)._push(datalist, { x_group: 2 });
+    if (this.historyData.length === this.pagination.total || datalist.length < this.pagination.pageSize) {
+      this.canLoad = false;
+    }
+  }
+
+  private goOrder(status: any) {
+    this.$router.push({ name: "order-list", query: { status: status } });
+  }
+  private viewDetail(item: any) {
+    this.$router.push({ path: "/product-detail", query: { id: item.id } });
+  }
+
+  private mounted() {
     this.initialize();
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .product-header {
@@ -247,13 +238,11 @@ export default {
 }
 
 .product-list {
-  // margin: 0 20px;
   overflow: hidden;
 }
 
 .product-item {
   display: inline-block;
-  // height: 382px;
   width: 374px;
   background-color: #fff;
   padding: 24px;
@@ -336,9 +325,7 @@ export default {
   padding-top: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid #eee;
-  // height: 122px;
   font-size: 0;
-  // margin-bottom: 1px; /* no */
   .about-me-menu {
     vertical-align: top;
     display: inline-block;

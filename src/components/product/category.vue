@@ -3,12 +3,14 @@
     <header-search :show-back="false" @focus="toSearch" @search="toSearch"></header-search>
     <div class="category">
       <div class="category-list">
-        <div class="category-item" :class="{'selected': 999 === selectedId}" @click="select(999, 'On Sale')">
-          On Sale
-        </div>
-        <div v-for="item in categoryList" :key="item.id" class="category-item ellipsis"
-             :class="{'selected':item.id === selectedId}" @click="select(item.id, item.name)">
-          {{item.name}}
+        <div>
+          <div class="category-item" :class="{'selected': 999 === selectedId}" @click="select(999, 'On Sale')">
+            On Sale
+          </div>
+          <div v-for="item in categoryList" :key="item.id" class="category-item ellipsis"
+               :class="{'selected':item.id === selectedId}" @click="select(item.id, item.name)">
+            {{item.name}}
+          </div>
         </div>
       </div>
       <div class="product-list">
@@ -227,6 +229,7 @@ export default {
 .category-list {
   width: 192px;
   height: 100%;
+  overflow-y: scroll;
 }
 
 .category-item {

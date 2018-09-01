@@ -23,9 +23,12 @@ export default {
       computed: {
         auth() {
           return (<any>store).state.user.auth
+        },
+        me() {
+          return (<any>store).state.user
         }
       }
-    })
+    });
     Object.keys(filters).forEach(function(key) {
       Vue.filter(key, (<any>filters)[key])
     })
